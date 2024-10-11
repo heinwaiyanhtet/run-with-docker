@@ -1,14 +1,13 @@
 #!/bin/bash
 
 # Configuration Variables
-HOST_PORT=27019  
 DB_USERNAME="admin"
 DB_PASSWORD="password"
 MONGODB_CONTAINER_NAME="mongodb-container"
 
 # Start MongoDB container using Docker Compose
 echo "Starting MongoDB container..."
-docker compose up -d
+docker-compose up -d
 
 # Check if the MongoDB container is running
 if [ "$(docker ps -q -f name=$MONGODB_CONTAINER_NAME)" ]; then
@@ -18,6 +17,6 @@ else
     exit 1
 fi
 
-# Print MongoDB connection URL
-MONGODB_URL="mongodb://$DB_USERNAME:$DB_PASSWORD@localhost:$HOST_PORT"
+# MongoDB will be available on localhost:27017 since we are using host networking
+MONGODB_URL="mongodb://$DB_USERNAME:$DB_PASSWORD@localhost:27017"
 echo "MongoDB connection URL: $MONGODB_URL"
