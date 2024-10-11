@@ -32,7 +32,8 @@ if [ -n "$CONTAINER_NAME" ]; then
 
     # Execute database.sql in the PostgreSQL container
     echo "Executing database.sql in the container..."
-    docker exec -i "$CONTAINER_NAME" pg_restore --no-owner -U admin -d deeplink /database.sql
+    docker exec -i "$CONTAINER_NAME" psql -U admin -d bossnation -f /database.sql
+    # docker exec -i "$CONTAINER_NAME" pg_restore -U admin -d bossnation /database.sql
     if [ $? -eq 0 ]; then
         echo "SQL file executed successfully."
     else
@@ -44,8 +45,8 @@ else
 fi
 
 POSTGRES_USER="admin" 
-POSTGRES_PASSWORD="DN9z6JLAen728UpYFnyfKYEInALxykKUvYCWGz7EQueScSpEnu" 
-POSTGRES_DB="deeplink"
+POSTGRES_PASSWORD="w6T63z5lvBItSOoGA77NZ1qQhwnlN45yT2NKMnnpVykwTetfXYY" 
+POSTGRES_DB="bossnation"
 POSTGRES_HOST="localhost"
 POSTGRES_PORT=$(docker compose port postgres 5432 | cut -d: -f2) # Extract the mapped port
 

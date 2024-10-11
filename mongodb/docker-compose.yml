@@ -4,8 +4,7 @@ services:
   mongodb:
     image: mongo:latest
     container_name: mongodb-container
-    ports:
-      - "27018:27017" 
+    network_mode: host  # Use host networking
     volumes:
       - ./mongodb-data:/data/db
     environment:
